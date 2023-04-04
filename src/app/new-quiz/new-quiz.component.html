@@ -1,0 +1,14 @@
+<form  [formGroup]="quizform" id="form" (ngSubmit)="callingFunction()">
+    <div #form >    
+        <label for="title">Titolo quiz</label>
+        <br>
+        <input type="text" formControlName="title" id="title">
+        <br>
+        <label for="title">Descrizione quiz</label>
+        <br>
+        <input type="text" formControlName="description" id="description">
+        <br>
+        <button (click)="addQuestion()" id="addquestion">Add question</button>
+        <button type="submit" id="submit">Submit Application</button></div>
+</form>
+<button (click)="showForm()">Show debug</button>
