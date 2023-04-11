@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NewQuizComponent } from './new-quiz/new-quiz.component';
+import { QuizGeneratorComponent } from './quiz-generator/quiz-generator.component';
 
 const routes: Routes = [
-  { path: 'create', component: NewQuizComponent },
-  { path: "**", component: NewQuizComponent}
+  { path: 'create', component: QuizGeneratorComponent },
+  { path: "**", component: QuizGeneratorComponent}
 ];
 
 @NgModule({

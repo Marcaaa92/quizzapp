@@ -1,1 +1,41 @@
-<p>quiz-generator works!</p>
+<form  #form="ngForm" >
+    <label for="title">Titolo quiz</label>
+    <br>
+    <input type="text" id="title" [(ngModel)]="quiz.title"  [ngModelOptions]="{standalone: true}" #title="ngModel" (keypress)="formValidator(title.value)">
+    <label for="title" *ngIf="title.value==''&& title.touched">Il campo deve essere compilato</label>
+    <br>
+
+    <label for="description">Descrizione quiz</label>
+    <br>
+    <input type="text" id="description" [(ngModel)]="quiz.description" [ngModelOptions]="{standalone: true}" #subititle="ngModel" (keypress)="formValidator(subititle.value)">
+    <label for="description" *ngIf="subititle.value==''&& subititle.touched">Il campo deve essere compilato</label>
+    <br>
+
+    <div *ngFor="let question of quiz.questions; let i = index">
+
+        <label for="questionTitle{{i+1}}">Domanda n {{question.id}}</label>
+        <br>
+        <input type="text" id="questionTitle{{i+1}}" [(ngModel)]="quiz.questions![i].title" [ngModelOptions]="{standalone: true}" #questionInput="ngModel" (keypress)="formValidator(questionInput.value)">
+        <label for="questionTitle{{i+1}}" *ngIf="questionInput.value==''&& questionInput.touched">Il campo deve essere compilato</label>
+        <br>
+        
+        <div *ngFor="let answer of question.answers; let j = index">
+            <label for="answerText{{i + '-' + j}}">risposta n {{answer.id}}</label>
+            <br>
+            <input type="text" id="answerText{{i + '-' + j}}" [(ngModel)]="quiz.questions![i].answers![j].text" [ngModelOptions]="{standalone: true}" #answerInput="ngModel" (keypress)="formValidator(answerInput.value)">
+            <label for="title" for="answerText{{i + '-' + j}}" *ngIf="answerInput.value==''&& answerInput.touched">Il campo deve essere compilato</label>
+            
+            <label for="answerTrue{{i + '-' + j}}">Vera?</label>
+            <input type="checkbox" id="answerTrue{{i + '-' + j}}" [(ngModel)]="quiz.questions![i].answers![j].correct" [ngModelOptions]="{standalone: true}" (click)="formValidator('w')">
+            
+            <button *ngIf="answer.id==question.answers?.length" id="addAnswers" (click)="addAnswer(question.id)">Add answer</button>
+        </div>
+
+        <button *ngIf="question.id==quiz.questions!.length" id="addQuestion" (click)="addQuestion()">Add question</button>
+
+        </div>
+
+    <button type="submit" id="submit" (click)="test(form)" [disabled]="!valid">Submit Application</button>
+  </form>
+
+  <p>{{feedback}}</p>
