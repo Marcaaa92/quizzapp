@@ -3,16 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { jsonIgnoreReplacer } from 'json-ignore';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ApiService {
+export class ApiQuizService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  sendDataDB(data:any): Observable<any>{
+  newQuiz(data: any): Observable<any> {
     let dataJson = JSON.stringify(data, jsonIgnoreReplacer);
-    return this.http.put<any>('http://localhost:8080/newQuiz',dataJson)
+    return this.http.put<any>('http://localhost:8080/newQuiz', dataJson);
   }
 }
