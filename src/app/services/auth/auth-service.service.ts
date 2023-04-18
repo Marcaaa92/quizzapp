@@ -10,9 +10,14 @@ export class AuthService {
     this.isLoggedIn = true;
   }
   logout() {
+    sessionStorage.clear()
     this.isLoggedIn = false;
   }
   isAuthenticated() {
-    return this.isLoggedIn;
+    return new Promise<boolean>((resolve, reject) => {
+      setTimeout(() => {
+        resolve(this.isLoggedIn);
+      }, 100);
+    });
   }
 }

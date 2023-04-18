@@ -9,11 +9,13 @@ export class HomeGuard{
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate() {
-    if (!this.authService.isAuthenticated()) {
-      return true;
-    } else {
-      this.router.navigate(['/create']);
-      return false;
-    }
+    this.authService.isAuthenticated().then((authenticated) => {
+      if (!authenticated) {
+        return true;
+      } else {
+        this.router.navigate(['/quiz-generator']);
+        return false;
+      }
+    });
   }
 }

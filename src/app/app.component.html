@@ -1,1 +1,17 @@
-<router-outlet></router-outlet>
+<div *ngIf="authService.isLoggedIn">
+    <a href="./logout">Logout</a>
+    <br>
+    <a href="./change-email">Change mail</a>
+    <br>
+    <a href="./change-password">Change password</a>
+    <br>
+    <a href="./account-deletion">Delete account</a>
+</div>
+<div *ngIf="!authService.isLoggedIn">
+    <a href="./login">Login</a>
+    <br>
+    <a href="./register">Register</a>
+</div>
+<div>
+    <router-outlet></router-outlet>
+</div>

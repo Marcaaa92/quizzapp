@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Question } from '../../models/Question';
-import { Answer } from '../../models/Answer';
-import { Quiz } from '../../models/Quiz';
-import { ApiQuizService } from '../../services/api/api-quiz.service';
+import { Question } from '../../../models/Question';
+import { Answer } from '../../../models/Answer';
+import { Quiz } from '../../../models/Quiz';
+import { ApiQuizService } from '../../../services/api/api-quiz.service';
 
 @Component({
   selector: 'app-quiz-generator',
@@ -65,18 +65,28 @@ export class QuizGeneratorComponent {
     );
     this.valid = false;
   }
-  test(form: any) {
-    console.log(JSON.stringify(this.quiz));
-    console.log(form);
-    this.service.newQuiz(this.quiz).subscribe((response) => {
-      if (response.statusCode == 200) {
-        this.feedback = 'quiz aggiunto con successo!';
-        setTimeout(function () {
-          window.location.reload();
-        }, 5000);
-      } else {
-        this.feedback = response.msg;
+  resetForm(){
+    this.quiz=new Quiz("","")
+    this.addQuestion()
+  }
+  test() {
+    var json = sessionStorage.getItem('user');
+    if (json) {
+      var dataSessionStorage = JSON.parse(json);
+      if (dataSessionStorage) {
+        var token = dataSessionStorage['token'];
+        this.quiz.token = token;
+        this.service.newQuiz(this.quiz).subscribe((response) => {
+          if (response.statusCode == 200) {
+            this.feedback = 'quiz aggiunto con successo!';
+            this.resetForm()
+          } else {
+            this.feedback = response.msg;
+          }
+        });
       }
-    });
+    } else {
+      this.feedback = "non sei autenticato"
+    }
   }
 }

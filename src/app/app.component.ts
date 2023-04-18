@@ -1,20 +1,44 @@
 import { Component } from '@angular/core';
-import { LoginGuard } from './services/auth/guard/login.guard';
 import { AuthService } from './services/auth/auth-service.service';
+import { ApiUserService } from './services/api/api-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'quizzapp';
-  constructor(private auth: LoginGuard, private authService: AuthService){
-    if(sessionStorage.length==0){
+  constructor(
+    public authService: AuthService,
+    private apiUserService: ApiUserService,
+    private router: Router
+  ) {
+    if (sessionStorage.length == 0) {
       authService.logout();
-    }
-    else{
-      authService.login();
+    } else {
+      var json = sessionStorage.getItem('user');
+      if (json) {
+        var data = JSON.parse(json);
+        if (data) {
+          var token = data['token'];
+          this.apiUserService.checkTokenValidity(token).subscribe({
+            next: () => {
+              authService.login();
+            },
+            error: () => {
+              authService.logout();
+            },
+          });
+        }
+        else{
+          authService.logout();
+        }
+      }
+      else{
+        authService.logout();
+      }
     }
   }
 }

@@ -9,9 +9,12 @@
     <br>
     <input type="password" formControlName="password">
     <br>
-    <label *ngIf="form.get('password')?.touched==true && form.get('password')?.valid==false" for="password">Il campo password deve essere compilato e deve essere lungo almeno 8 caratteri contenente almeno lettera maiuscola, minuscola, un numero e i caratteri speciali come ! # $ % & ? .</label>
+    <label *ngIf="form.get('password')?.touched==true && form.get('password')?.valid==false" for="password">Il campo password deve essere compilato</label>
     <br>
 
     <button type="submit" id="submit" [disabled]="!form.valid">Registrati</button>
-  </form>
-  <p>{{feedback}}</p>
+</form>
+<p>{{feedback}}</p>
+<a href="./register">Non sei registrato? Registrati!</a>
+<br>
+<a href="./reset-password">Dimenticata la password? Recuperala!</a>

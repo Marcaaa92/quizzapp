@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiUserService } from 'src/app/services/api/api-user.service';
 import { AuthService } from 'src/app/services/auth/auth-service.service';
+import { RedirectUtils } from 'src/app/utils/redirect.utils';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ export class LoginComponent {
           this.auth.login();
           this.feedback = 'Loggato';
           this.form.reset();
-          this.router.navigate(['/create']);
+          new RedirectUtils(this.router, 0, "/create");
         }
       },
       error: (err) => {

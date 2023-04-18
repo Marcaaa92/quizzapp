@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="requestChange()">
+    <label for="newEmail">Nuova Email</label>
+    <br>
+    <input type="email" formControlName="newEmail">
+    <br>
+    <label *ngIf="form.get('newEmail')?.dirty==true && form.get('newEmail')?.valid==false" for="newEmail">IL campo deve essere compilato e deve contenere una mail valida</label>
+    <label *ngIf="this.form.getError('mismatch') && this.form.get('newEmail')?.dirty">La mail deve essere diversa dall'attuale</label>
+    <br>
+    <label for="password">La tua Password</label>
+    <br>
+    <input type="password" formControlName="password">
+    <button type="submit" id="submit" [disabled]="!form.valid">Registrati</button>
+  </form>
+  <p>{{feedback}}</p>
