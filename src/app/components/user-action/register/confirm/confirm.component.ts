@@ -12,9 +12,13 @@ export class RegisterConfirmComponent {
   token: string | null;
   feedback: string = '';
 
-  constructor(private route: ActivatedRoute, private router: Router, private service: ApiUserService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: ApiUserService
+  ) {
     this.token = this.route.snapshot.paramMap.get('token');
-    console.log(this.token)
+    console.log(this.token);
   }
   ngOnInit(): void {
     this.service.registerConfirm(this.token).subscribe({
@@ -23,7 +27,7 @@ export class RegisterConfirmComponent {
           this.feedback = 'Email confermata con successo';
           console.log(response);
         }
-        new RedirectUtils(this.router, 2500, "/login");
+        new RedirectUtils(this.router, 2500, 'login');
       },
       error: (error) => {
         if (error.error.statusCode == 500) {
@@ -32,9 +36,8 @@ export class RegisterConfirmComponent {
         if (error.error.statusCode == 409) {
           this.feedback = 'email già confermata';
         }
-        new RedirectUtils(this.router, 2500, "/login");
+        new RedirectUtils(this.router, 2500, 'login');
       },
     });
   }
-
 }

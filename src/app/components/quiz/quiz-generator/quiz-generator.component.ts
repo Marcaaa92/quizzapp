@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Question } from '../../../models/Question';
 import { Answer } from '../../../models/Answer';
 import { Quiz } from '../../../models/Quiz';
 import { ApiQuizService } from '../../../services/api/api-quiz.service';
+import { Environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-quiz-generator',
@@ -14,8 +15,19 @@ export class QuizGeneratorComponent {
   quiz: Quiz = new Quiz('', '');
   valid: boolean = false;
   feedback: string = '';
+  canView: boolean = false;
+  quizLink!: string;
+  @ViewChild('submit') submit!: ElementRef;
+
   constructor(private service: ApiQuizService) {
-    this.addQuestion();
+    var token = Environment.getToken();
+    if (token) {
+      this.canView = true;
+      this.addQuestion();
+    }
+    else {
+      this.feedback = "non sei loggato!";
+    }
   }
 
   formValidator(text: string) {
@@ -24,25 +36,34 @@ export class QuizGeneratorComponent {
       let v = true;
       setTimeout(() => {
         if (this.quiz.title != '' && this.quiz.description != '') {
-          for (let i = 0; i < this.quiz.questions!.length; i++) {
-            if (this.quiz.questions![i].title == '') {
-              v = false;
-              break;
-            }
-            let v2 = 0;
-            for (let j = 0; j < this.quiz.questions![i].answers!.length; j++) {
-              if (this.quiz.questions![i].answers![j].text == '') {
+          if (this.quiz.questions!.length > 0) {
+            for (let i = 0; i < this.quiz.questions!.length; i++) {
+              if (this.quiz.questions![i].title == '') {
                 v = false;
                 break;
               }
-              if (this.quiz.questions![i].answers![j].correct == true) {
-                v2++;
+              let v2 = 0;
+              if (this.quiz.questions![i].answers!.length > 1) {
+                for (let j = 0; j < this.quiz.questions![i].answers!.length; j++) {
+                  if (this.quiz.questions![i].answers![j].text == '') {
+                    v = false;
+                    break;
+                  }
+                  if (this.quiz.questions![i].answers![j].correct == true) {
+                    v2++;
+                  }
+                }
+                if (v2 == 0) {
+                  v = false;
+                  break;
+                }
+              }
+              else {
+                v = false;
               }
             }
-            if (v2 == 0) {
-              v = false;
-              break;
-            }
+          } else {
+            v = false;
           }
         } else {
           v = false;
@@ -57,6 +78,7 @@ export class QuizGeneratorComponent {
     this.addAnswer(this.quiz.questions?.length!);
     this.addAnswer(this.quiz.questions?.length!);
     this.valid = false;
+    setTimeout(() => { window.scrollTo(0, document.body.scrollHeight); }, 10)
   }
 
   addAnswer(id: number) {
@@ -64,27 +86,36 @@ export class QuizGeneratorComponent {
       new Answer(this.quiz.questions![id - 1].answers!.length + 1, '', false)
     );
     this.valid = false;
+    setTimeout(() => { window.scrollTo(0, document.body.scrollHeight); }, 10)
   }
-  resetForm(){
-    this.quiz=new Quiz("","")
+  deleteAnswer(i: number, answer: Answer) {
+    this.quiz.questions![i - 1].deleteAnswer(answer);
+    this.valid=false;
+  }
+  deleteQuestion(question: Question) {
+    this.quiz.deleteQuestion(question);
+    this.valid=false;
+  }
+  resetForm() {
+    this.quiz = new Quiz("", "")
     this.addQuestion()
   }
-  test() {
-    var json = sessionStorage.getItem('user');
-    if (json) {
-      var dataSessionStorage = JSON.parse(json);
-      if (dataSessionStorage) {
-        var token = dataSessionStorage['token'];
-        this.quiz.token = token;
-        this.service.newQuiz(this.quiz).subscribe((response) => {
-          if (response.statusCode == 200) {
-            this.feedback = 'quiz aggiunto con successo!';
-            this.resetForm()
-          } else {
-            this.feedback = response.msg;
-          }
-        });
-      }
+  generate() {
+    this.submit.nativeElement.disabled = true;
+    this.canView = false;
+    var token = Environment.getToken();
+    if (token) {
+      this.quiz.token = token as unknown as string;
+      this.service.newQuiz(this.quiz).subscribe((response) => {
+        if (response.statusCode == 200) {
+          this.feedback = 'quiz aggiunto con successo!';
+          this.quizLink = Environment.siteUrl + '/quiz-viewer/' + response.msg
+          this.resetForm()
+        } else {
+          this.canView = true;
+          this.feedback = response.msg;
+        }
+      });
     } else {
       this.feedback = "non sei autenticato"
     }

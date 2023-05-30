@@ -4,8 +4,8 @@ export class Answer {
   @jsonIgnore()
   id: number;
   public text: string;
-  public correct: boolean;
-  constructor(id: number, text: string, correct: boolean) {
+  public correct: Boolean;
+  constructor(id: number, text: string, correct: Boolean) {
     this.id = id;
     this.text = text;
     this.correct = correct;

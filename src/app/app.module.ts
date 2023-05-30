@@ -20,7 +20,16 @@ import { ResetPasswordComponent } from './components/user-action/reset-password/
 import { ConfirmResetComponent } from './components/user-action/reset-password/confirm/confirm.component';
 import { QuizViewerComponent } from './components/quiz/quiz-viewer/quiz-viewer.component';
 import { AccountDeletion } from './components/user-action/account-deletion/account-deleton.component';
-
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import {  GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { QuizResultsViewerComponent } from './components/quiz/quiz-results-viewer/quiz-results-viewer.component';
+import { QuizCorrectionComponent } from './components/quiz/quiz-results-viewer/quiz-correction/quiz-correction.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { HomeComponent } from './components/home/home.component';
+import { QuizResultsViewerUserComponent } from './components/quiz/quiz-results-viewer-user/quiz-results-viewer-user.component';
+import { QuizCorrectionUserComponent } from './components/quiz/quiz-results-viewer-user/quiz-correction-user/quiz-correction-user.component';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { Environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,16 +44,49 @@ import { AccountDeletion } from './components/user-action/account-deletion/accou
     ResetPasswordComponent,
     ConfirmResetComponent,
     QuizViewerComponent,
-    AccountDeletion
+    AccountDeletion,
+    QuizResultsViewerComponent,
+    QuizCorrectionComponent,
+    QuizResultsViewerUserComponent,
+    QuizCorrectionUserComponent,
+    NotfoundComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
   ],
-  providers: [AuthService, LoginGuard, HomeGuard],
+  providers: [AuthService, LoginGuard, HomeGuard,
+  {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            '320136785911-2r13rl75kjf8khrhecat4gbc3ts4v9la.apps.googleusercontent.com'
+          )
+        },
+      ],
+      onError: (err) => {
+        console.error(err);
+      }
+    } as SocialAuthServiceConfig,
+  },
+  {
+    provide: RECAPTCHA_SETTINGS,
+    useValue: {
+      siteKey: Environment.siteKey,
+    } as RecaptchaSettings,
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

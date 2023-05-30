@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiUserService } from 'src/app/services/api/api-user.service';
@@ -13,25 +13,29 @@ import { AccountDeletionConfirm } from 'src/app/validators/account-deletion-conf
 export class AccountDeletion {
   feedback: string = '';
   form: FormGroup;
+  @ViewChild('submit') submit!: ElementRef;
   constructor(
     private service: ApiUserService,
     private auth: AuthService,
     private router: Router
   ) {
-    this.form = new FormGroup({
-      email: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-      verify: new FormControl('', [Validators.required])
-    },
-    [AccountDeletionConfirm.MatchValidator('verify')]);
+    this.form = new FormGroup(
+      {
+        email: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required]),
+        verify: new FormControl('', [Validators.required]),
+      },
+      [AccountDeletionConfirm.MatchValidator('verify')]
+    );
   }
   deletion() {
+    this.submit.nativeElement.disabled=true;
     console.log(JSON.stringify(this.form.value));
     this.service.accountDeletion(this.form.value).subscribe({
       next: (response) => {
         if (response.statusCode == 200) {
           this.auth.logout();
-          this.router.navigate(["/login"])
+          this.router.navigate(['login']);
         }
       },
       error: (err) => {
@@ -40,6 +44,6 @@ export class AccountDeletion {
           this.form.reset();
         }
       },
-    })
+    });
   }
 }

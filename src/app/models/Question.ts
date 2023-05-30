@@ -13,4 +13,13 @@ export class Question {
   public addAnswer(answer: Answer) {
     this.answers?.push(answer);
   }
+  public deleteAnswer(answer: Answer) {
+    const index = this.answers!.indexOf(answer);
+    if (index > -1) { 
+      this.answers!.splice(index, 1); 
+      for(let i=0; i<this.answers!.length; i++)
+        this.answers![i].id=i+1;
+    }
+    console.log(this.answers)
+  }
 }

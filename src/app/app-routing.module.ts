@@ -13,8 +13,14 @@ import { ConfirmChangeEmailComponent } from './components/user-action/change-ema
 import { ResetPasswordComponent } from './components/user-action/reset-password/reset-password.component';
 import { ConfirmResetComponent } from './components/user-action/reset-password/confirm/confirm.component';
 import { AccountDeletion } from './components/user-action/account-deletion/account-deleton.component';
+import { QuizViewerComponent } from './components/quiz/quiz-viewer/quiz-viewer.component';
+import { QuizResultsViewerComponent } from './components/quiz/quiz-results-viewer/quiz-results-viewer.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { HomeComponent } from './components/home/home.component';
+import { QuizResultsViewerUserComponent } from './components/quiz/quiz-results-viewer-user/quiz-results-viewer-user.component';
 
 const routes: Routes = [
+  { path: '',   redirectTo: 'home', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, canActivate:[HomeGuard]},
   { path: 'register/:token', component: RegisterConfirmComponent , canActivate:[HomeGuard]},
   { path: 'login', component: LoginComponent, canActivate:[HomeGuard]},
@@ -25,9 +31,12 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent, canActivate:[HomeGuard]},
   { path: 'account-deletion', component: AccountDeletion, canActivate:[LoginGuard]},
   { path: 'reset-password/:token', component: ConfirmResetComponent, canActivate:[HomeGuard]},
-  { path: 'quiz-viewer', component: ConfirmResetComponent, canActivate:[LoginGuard]},
+  { path: 'quiz-viewer/:quizId', component: QuizViewerComponent, canActivate:[LoginGuard]},
+  { path: 'quiz-viewer/:quizId/results', component: QuizResultsViewerComponent, canActivate:[LoginGuard]},
+  { path: 'quiz-viewer/:quizId/results/user', component: QuizResultsViewerUserComponent, canActivate:[LoginGuard]},
   { path: 'quiz-generator', component: QuizGeneratorComponent, canActivate:[LoginGuard]},
-  { path: "**", component: QuizGeneratorComponent, canActivate:[LoginGuard]}
+  { path: 'home', component: HomeComponent},
+  { path: "**", component: NotfoundComponent}
 ];
 
 @NgModule({

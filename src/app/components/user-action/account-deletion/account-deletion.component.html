@@ -1,3 +1,4 @@
+<h1>Elimina il tuo account</h1>
 <form [formGroup]="form" (ngSubmit)="deletion()">
     <label for="email">Email</label>
     <br>
@@ -15,6 +16,7 @@
     <br>
     <input type="verify" formControlName="verify">
     <br>
-    <button type="submit" id="submit" [disabled]="!form.valid">Registrati</button>
-  </form>
-  <p>{{feedback}}</p>
+    <br>
+    <button type="submit" id="submit" [disabled]="!form.valid" class="btn btn-primary" #submit>Elimina il profilo</button>
+</form>
+<p>{{feedback}}</p>

@@ -1,3 +1,4 @@
+<h1>Login</h1>
 <form [formGroup]="form" (ngSubmit)="login()">
     <label for="email">Email</label>
     <br>
@@ -11,9 +12,12 @@
     <br>
     <label *ngIf="form.get('password')?.touched==true && form.get('password')?.valid==false" for="password">Il campo password deve essere compilato</label>
     <br>
-
-    <button type="submit" id="submit" [disabled]="!form.valid">Registrati</button>
+    <re-captcha id="recaptcha" name="recaptcha" formControlName="recaptcha" required [class.is-invalid]="form.get('recaptcha')?.touched==true && form.get('recaptcha')?.valid==false"></re-captcha>
+    <button type="submit" id="submit" [disabled]="!form.valid" class="btn btn-primary" #submit>Login</button>
 </form>
+<br>
+<script src="https://accounts.google.com/gsi/client" async defer></script> 
+<asl-google-signin-button  type="standard" size='medium'></asl-google-signin-button>
 <p>{{feedback}}</p>
 <a href="./register">Non sei registrato? Registrati!</a>
 <br>

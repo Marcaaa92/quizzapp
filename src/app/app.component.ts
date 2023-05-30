@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth/auth-service.service';
 import { ApiUserService } from './services/api/api-user.service';
-import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,11 +8,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'quizzapp';
+  baseUrl?: String;
   constructor(
     public authService: AuthService,
     private apiUserService: ApiUserService,
-    private router: Router
-  ) {
+    ) {
     if (sessionStorage.length == 0) {
       authService.logout();
     } else {

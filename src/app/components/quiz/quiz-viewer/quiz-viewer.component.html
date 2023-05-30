@@ -1,6 +1,17 @@
-<form>
-    
-    <div>
-
-    </div>
-</form>
+<div *ngIf='feedback==""||canView'>
+    <form *ngIf="quiz">
+        <h2>{{quiz.title}}</h2>
+        <h3>{{quiz.description}}</h3>
+        <div *ngFor="let questions of quiz.questions ; let i = index">
+            <h4>{{questions.title}}</h4>
+            <div style="display: flex;">
+                <div *ngFor="let answers of questions.answers ; let j = index">
+                    <span id="{{i}}-{{j}}">{{answers.text}}</span>
+                    <span><input [(ngModel)]="quiz.questions![i].answers![j].correct" [ngModelOptions]="{standalone: true}"  type="checkbox" (click)="formValidator('w')" id="{{i}}-{{j}}"></span>
+                </div>
+            </div>
+        </div>
+        <button type="submit" id="submit" (click)="test()" [disabled]="!allCompiled" #submit>Invia quiz!</button>
+    </form>
+</div>
+<p>{{feedback}}</p>

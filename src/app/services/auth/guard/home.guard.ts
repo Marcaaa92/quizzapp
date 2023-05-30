@@ -13,7 +13,7 @@ export class HomeGuard{
       if (!authenticated) {
         return true;
       } else {
-        this.router.navigate(['/quiz-generator']);
+        this.router.navigate(['home']);
         return false;
       }
     });

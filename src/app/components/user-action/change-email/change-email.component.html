@@ -1,3 +1,4 @@
+<h1>Cambio email</h1>
 <form [formGroup]="form" (ngSubmit)="requestChange()">
     <label for="newEmail">Nuova Email</label>
     <br>
@@ -9,6 +10,8 @@
     <label for="password">La tua Password</label>
     <br>
     <input type="password" formControlName="password">
-    <button type="submit" id="submit" [disabled]="!form.valid">Registrati</button>
-  </form>
-  <p>{{feedback}}</p>
+    <br>
+    <br>
+    <button type="submit" id="submit" [disabled]="!form.valid"  class="btn btn-primary" #submit>Cambia email</button>
+</form>
+<p>{{feedback}}</p>

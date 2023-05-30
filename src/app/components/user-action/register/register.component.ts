@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiUserService } from 'src/app/services/api/api-user.service';
 import { MatchPasswordValidator } from 'src/app/validators/password-match.validator';
@@ -11,6 +11,8 @@ import { MatchPasswordValidator } from 'src/app/validators/password-match.valida
 export class RegisterComponent {
   feedback: string = '';
   form: FormGroup;
+  @ViewChild('submit') submit!: ElementRef;
+
   constructor(private service: ApiUserService) {
     this.form = new FormGroup(
       {
@@ -34,14 +36,13 @@ export class RegisterComponent {
     );
   }
   register() {
-    document.getElementById("submit")!.style.visibility="hidden"
+    this.submit.nativeElement.disabled=true;
     console.log(JSON.stringify(this.form.value));
     this.service.register(this.form.value).subscribe({
       next: (response) => {
         if (response.statusCode == 200) {
           this.feedback = 'Controlla la tua mail';
           this.form.reset();
-          document.getElementById("submit")!.style.visibility="visible"
           console.log(response);
         }
       },
@@ -49,7 +50,6 @@ export class RegisterComponent {
         if (error.error.statusCode == 409) {
           this.feedback = 'la mail è già presenete nel sistema';
           this.form.controls['email'].reset();
-          document.getElementById("submit")!.style.visibility="visible"
         }
       },
     });

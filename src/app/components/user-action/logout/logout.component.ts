@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth-service.service';
 export class LogoutComponent {
   constructor(private auth: AuthService, private router: Router) {
     setTimeout(() => {
-    auth.logout();
-    },100);
+      auth.logout();
+    }, 100);
   }
 }

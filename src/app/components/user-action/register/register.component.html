@@ -1,3 +1,4 @@
+<h1>Registrati</h1>
 <form [formGroup]="form" (ngSubmit)="register()">
     <label for="name">Nome:</label>
     <br>
@@ -22,7 +23,8 @@
     <input type="password" formControlName="password2">
     <br>
     <label *ngIf="this.form.getError('mismatch') && this.form.get('password2')?.dirty">Le password devono coincidere</label>
-    <button type="submit" id="submit" [disabled]="!form.valid">Registrati</button>
+    <br>
+    <button type="submit" id="submit" [disabled]="!form.valid" class="btn btn-primary" #submit>Registrati</button>
   </form>
   <p>{{feedback}}</p>
   <a href="./login">Già registrato? Effettua il login!</a>

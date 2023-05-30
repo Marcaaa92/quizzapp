@@ -12,7 +12,11 @@ export class ConfirmChangeEmailComponent {
   token: string | null;
   feedback: string = '';
 
-  constructor(private route: ActivatedRoute, private router: Router,  private service: ApiUserService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: ApiUserService
+  ) {
     this.token = this.route.snapshot.paramMap.get('token');
   }
   ngOnInit(): void {
@@ -22,7 +26,7 @@ export class ConfirmChangeEmailComponent {
           this.feedback = 'Email confermata con successo';
           console.log(response);
         }
-        new RedirectUtils(this.router, 2500, "/login");
+        new RedirectUtils(this.router, 2500, 'login');
       },
       error: (error) => {
         if (error.error.statusCode == 500) {
@@ -31,7 +35,7 @@ export class ConfirmChangeEmailComponent {
         if (error.error.statusCode == 409) {
           this.feedback = 'email già confermata';
         }
-        new RedirectUtils(this.router, 2500, "/login");
+        new RedirectUtils(this.router, 2500, 'login');
       },
     });
   }

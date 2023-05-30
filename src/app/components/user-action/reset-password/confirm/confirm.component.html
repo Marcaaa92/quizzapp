@@ -1,3 +1,4 @@
+<h1>Imposta la tua nuova password</h1>
 <form [formGroup]="form" (ngSubmit)="change()">
     <label for="password">Password</label>
     <br>
@@ -10,6 +11,7 @@
     <input type="password" formControlName="password2">
     <br>
     <label *ngIf="this.form.getError('mismatch') && this.form.get('password2')?.dirty">Le password devono coincidere</label>
-    <button type="submit" id="submit" [disabled]="!form.valid">Registrati</button>
+    <br>
+    <button type="submit" id="submit" [disabled]="!form.valid" class="btn btn-primary" #submit>Imposta nuova password</button>
   </form>
   <p>{{feedback}}</p>
