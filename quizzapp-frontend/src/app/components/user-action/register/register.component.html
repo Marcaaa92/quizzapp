@@ -1,30 +1,32 @@
-<h1>Registrati</h1>
-<form [formGroup]="form" (ngSubmit)="register()">
-    <label for="name">Nome:</label>
-    <br>
-    <input type="text" formControlName="name">
-    <br>
-    <label *ngIf="form.get('name')?.dirty==true && form.get('name')?.valid==false" for="name">Il campo deve essere compilato e deve avere una lunghezza di 2 caratteri minimo</label>
-    <br>
-    <label for="email">Email</label>
-    <br>
-    <input type="email" formControlName="email">
-    <br>
-    <label *ngIf="form.get('email')?.dirty==true && form.get('email')?.valid==false" for="email">IL campo deve essere compilato e deve contenere una mail valida</label>
-    <br>
-    <label for="password">Password</label>
-    <br>
-    <input type="password" formControlName="password">
-    <br>
-    <label *ngIf="form.get('password')?.dirty==true && form.get('password')?.valid==false" for="password">Il campo password deve essere compilato e deve essere lungo almeno 8 caratteri contenente almeno lettera maiuscola, minuscola, un numero e i caratteri speciali come ! # $ % & ? .</label>
-    <br>
-    <label for="password">Password</label>
-    <br>
-    <input type="password" formControlName="password2">
-    <br>
-    <label *ngIf="this.form.getError('mismatch') && this.form.get('password2')?.dirty">Le password devono coincidere</label>
-    <br>
-    <button type="submit" id="submit" [disabled]="!form.valid" class="btn btn-primary" #submit>Registrati</button>
-  </form>
-  <p>{{feedback}}</p>
-  <a href="./login">Già registrato? Effettua il login!</a>
+
+<div class = "background">
+  <div class="container">
+    <h1 class="login-text">Registrati</h1>
+    <form [formGroup]="form" (ngSubmit)="register()">
+      <div class="div-form-control">
+        <input type="text" formControlName="name" placeholder="nome" class="form-control">
+        <br>
+        <label *ngIf="form.get('name')?.dirty==true && form.get('name')?.valid==false" for="name">Il campo deve essere compilato e deve avere una lunghezza di 2 caratteri minimo</label>
+      </div>
+      <div class="div-form-control">
+        <input type="email" formControlName="email" placeholder="cognome" class="form-control">
+        <br>
+        <label *ngIf="form.get('email')?.dirty==true && form.get('email')?.valid==false" for="email">IL campo deve essere compilato e deve contenere una mail valida</label>
+      </div>
+      <div class="div-form-control">
+        <input type="password" formControlName="password" placeholder="password" class="form-control">
+        <br>
+        <label *ngIf="form.get('password')?.dirty==true && form.get('password')?.valid==false" for="password">Il campo password deve essere compilato e deve essere lungo almeno 8 caratteri contenente almeno lettera maiuscola, minuscola, un numero e i caratteri speciali come ! # $ % & ? .</label>
+      </div>
+      <div class="div-form-control">
+        <input type="password" formControlName="password2" placeholder="ripeti password" class="form-control">
+        <br>
+        <label *ngIf="this.form.getError('mismatch') && this.form.get('password2')?.dirty">Le password devono coincidere</label>
+      </div>
+      <br>
+      <button type="submit" id="submit" [disabled]="!form.valid" class="button" #submit>Registrati</button>
+    </form>
+    <p >{{feedback}}</p>
+    <a href="./login" class="link">Già registrato? Effettua il login!</a>
+  </div>
+</div>

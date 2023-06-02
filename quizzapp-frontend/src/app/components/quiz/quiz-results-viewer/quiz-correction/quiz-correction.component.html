@@ -6,7 +6,7 @@
             <div style="display: flex;">
                 <div *ngFor="let answers of questions.answers ; let j = index">
                     <span *ngIf='quizCorrection["questions"][i]["answers"][j]["answerStatus"]=="null"' style="background-color: transparent;">{{answers.text}}</span>
-                    <span *ngIf='quizCorrection["questions"][i]["answers"][j]["answerStatus"]=="userSelectedCorrect"' style="background-color: lime;">{{answers.text}}</span>
+                    <span *ngIf='quizCorrection["questions"][i]["answers"][j]["answerStatus"]=="userSelectedCorrect"' style="background-color: ;">{{answers.text}}</span>
                     <span *ngIf='quizCorrection["questions"][i]["answers"][j]["answerStatus"]=="rightAnswers"' style="background-color: lightskyblue;">{{answers.text}}</span>
                     <span *ngIf='quizCorrection["questions"][i]["answers"][j]["answerStatus"]=="userSelectedWrong"' style="background-color: lightcoral;">{{answers.text}}</span>
                 </div>

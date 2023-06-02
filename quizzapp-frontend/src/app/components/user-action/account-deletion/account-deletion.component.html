@@ -1,22 +1,25 @@
-<h1>Elimina il tuo account</h1>
-<form [formGroup]="form" (ngSubmit)="deletion()">
-    <label for="email">Email</label>
-    <br>
-    <input type="email" formControlName="email">
-    <br>
-    <label *ngIf="form.get('email')?.touched==true && form.get('email')?.valid==false" for="email">IL campo deve essere compilato e deve contenere una mail valida</label>
-    <br>
-    <label for="password">Password</label>
-    <br>
-    <input type="password" formControlName="password">
-    <br>
-    <label *ngIf="form.get('password')?.touched==true && form.get('password')?.valid==false" for="password">Il campo password deve essere compilato e deve essere lungo almeno 8 caratteri contenente almeno lettera maiuscola, minuscola, un numero e i caratteri speciali come ! # $ % & ? .</label>
-    <br>
-    <label for="verify">Frase di verifica, scrivi " Si sono consapevole" se sei consapevole dell'eliminazione dell'account</label>
-    <br>
-    <input type="verify" formControlName="verify">
-    <br>
-    <br>
-    <button type="submit" id="submit" [disabled]="!form.valid" class="btn btn-primary" #submit>Elimina il profilo</button>
-</form>
-<p>{{feedback}}</p>
+
+<div class = "background">
+    <div class="container">
+        <h1 class="title">Elimina il tuo account</h1>
+        <form [formGroup]="form" (ngSubmit)="deletion()">
+            <div class="div-form-control">
+                <input type="email" formControlName="email" class="form-control" placeholder="Email">
+                <br>
+                <label *ngIf="form.get('email')?.touched==true && form.get('email')?.valid==false" for="email" class="hint">IL campo deve essere compilato e deve contenere una mail valida</label>
+            </div>
+            <div class="div-form-control">
+                <input type="password" formControlName="password" class="form-control" placeholder="Password">
+                <br>
+                <label *ngIf="form.get('password')?.touched==true && form.get('password')?.valid==false" for="password" class="hint">Il campo password deve essere compilato e deve essere lungo almeno 8 caratteri contenente almeno lettera maiuscola, minuscola, un numero e i caratteri speciali come ! # $ % & ? .</label>
+            </div>
+            <div class="div-form-control">
+                <input type="verify" formControlName="verify" class="form-control" placeholder="Frase conferma 'Si sono consapevole'">
+                <br>
+            </div>
+            <br>
+            <button type="submit" id="submit" [disabled]="!form.valid" class="button" #submit>Elimina il profilo</button>
+        </form>
+        <p>{{feedback}}</p>
+    </div>
+</div>

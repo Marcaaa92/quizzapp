@@ -18,6 +18,9 @@ export class QuizViewerComponent {
   answerCorrect: number = 0;
   canView: boolean = false;
   @ViewChild('submit') submit!: ElementRef;
+  index:number = 0;
+  arrowLeftStyle:boolean=false
+  arrowRightStyle:boolean=true
 
   constructor(private route: ActivatedRoute, private service: ApiQuizService) {
     this.quizId = this.route.snapshot.paramMap.get('quizId');
@@ -174,5 +177,45 @@ export class QuizViewerComponent {
   }
   error(error: any) {
 
+  }
+  setCorrect(j:number){
+    if(this.quiz.questions![this.index].answers![j].correct)
+    this.quiz.questions![this.index].answers![j].correct=false;
+    else
+    this.quiz.questions![this.index].answers![j].correct=true;
+  }
+  next(){
+    if(this.index==this.quiz.questions!.length-1){
+    }
+    else{
+      this.index++;
+      if(this.index==this.quiz.questions!.length-1)
+      this.arrowRightStyle=false
+      else
+      this.arrowRightStyle=true
+      if(this.index==0)
+      this.arrowLeftStyle=false
+      else
+      this.arrowLeftStyle=true
+    }
+    console.log(this.index)
+
+  }
+  previous(){
+    if(this.index==0){
+
+    }
+    else{
+      this.index--;
+      if(this.index==this.quiz.questions!.length-1)
+      this.arrowRightStyle=false
+      else
+      this.arrowRightStyle=true
+      if(this.index==0)
+      this.arrowLeftStyle=false
+      else
+      this.arrowLeftStyle=true
+    }
+    console.log(this.index)
   }
 }

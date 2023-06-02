@@ -1,17 +1,20 @@
-<h1>Imposta la tua nuova password</h1>
-<form [formGroup]="form" (ngSubmit)="change()">
-    <label for="password">Password</label>
-    <br>
-    <input type="password" formControlName="password">
-    <br>
-    <label *ngIf="form.get('password')?.dirty==true && form.get('password')?.valid==false" for="password">Il campo password deve essere compilato e deve essere lungo almeno 8 caratteri contenente almeno lettera maiuscola, minuscola, un numero e i caratteri speciali come ! # $ % & ? .</label>
-    <br>
-    <label for="password">Password</label>
-    <br>
-    <input type="password" formControlName="password2">
-    <br>
-    <label *ngIf="this.form.getError('mismatch') && this.form.get('password2')?.dirty">Le password devono coincidere</label>
-    <br>
-    <button type="submit" id="submit" [disabled]="!form.valid" class="btn btn-primary" #submit>Imposta nuova password</button>
-  </form>
-  <p>{{feedback}}</p>
+
+<div class = "background">
+  <div class="container">
+      <h1 class="title">Imposta la tua nuova password</h1>
+      <form [formGroup]="form" (ngSubmit)="change()">
+        <div class="div-form-control">
+          <input type="password" formControlName="password" class="form-control" placeholder="Nuova password">
+          <br>
+          <label *ngIf="form.get('password')?.dirty==true && form.get('password')?.valid==false" for="password"  class="hint">Il campo password deve essere compilato e deve essere lungo almeno 8 caratteri contenente almeno lettera maiuscola, minuscola, un numero e i caratteri speciali come ! # $ % & ? .</label>
+        </div>
+        <div class="div-form-control">
+          <input type="password" formControlName="password2" class="form-control" placeholder="Ripeti la password">
+          <br>
+          <label *ngIf="this.form.getError('mismatch') && this.form.get('password2')?.dirty" class="hint">Le password devono coincidere</label>
+        </div>
+        <button type="submit" id="submit" [disabled]="!form.valid" class="button" #submit>Imposta nuova password</button>
+      </form>
+      <p>{{feedback}}</p>
+  </div>
+</div>
