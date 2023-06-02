@@ -1,24 +1,28 @@
-<h1>Login</h1>
-<form [formGroup]="form" (ngSubmit)="login()">
-    <label for="email">Email</label>
-    <br>
-    <input type="email" formControlName="email">
-    <br>
-    <label *ngIf="form.get('email')?.touched==true && form.get('email')?.valid==false" for="email">IL campo deve essere compilato e deve contenere una mail valida</label>
-    <br>
-    <label for="password">Password</label>
-    <br>
-    <input type="password" formControlName="password">
-    <br>
-    <label *ngIf="form.get('password')?.touched==true && form.get('password')?.valid==false" for="password">Il campo password deve essere compilato</label>
-    <br>
-    <re-captcha id="recaptcha" name="recaptcha" formControlName="recaptcha" required [class.is-invalid]="form.get('recaptcha')?.touched==true && form.get('recaptcha')?.valid==false"></re-captcha>
-    <button type="submit" id="submit" [disabled]="!form.valid" class="btn btn-primary" #submit>Login</button>
-</form>
-<br>
-<script src="https://accounts.google.com/gsi/client" async defer></script> 
-<asl-google-signin-button  type="standard" size='medium'></asl-google-signin-button>
-<p>{{feedback}}</p>
-<a href="./register">Non sei registrato? Registrati!</a>
-<br>
-<a href="./reset-password">Dimenticata la password? Recuperala!</a>
+
+<div class = "background">
+    <div class="container">
+        <h1 class="title">Login</h1>
+        <form [formGroup]="form" (ngSubmit)="login()">
+            <div class="div-form-control">
+                <input type="email" formControlName="email" class="form-control" placeholder="Email">
+                <br>
+                <label *ngIf="form.get('email')?.touched==true && form.get('email')?.valid==false" for="email" class="hint">Il campo deve essere compilato e deve contenere una mail valida</label>
+            </div>
+            <div class="div-form-control">
+                <input type="password" formControlName="password" class="form-control" placeholder="Password">
+                <br>
+                <label *ngIf="form.get('password')?.touched==true && form.get('password')?.valid==false" for="password" class="hint">Il campo password deve essere compilato</label>
+            </div>
+            <re-captcha id="recaptcha" name="recaptcha" formControlName="recaptcha" required [class.is-invalid]="form.get('recaptcha')?.touched==true && form.get('recaptcha')?.valid==false" class="google"></re-captcha>
+            <br>
+            <button type="submit" id="submit" [disabled]="!form.valid" class="btn btn-primary" #submit class="button">Login</button>
+        </form>
+        <br>
+        <script src="https://accounts.google.com/gsi/client" async defer></script> 
+        <asl-google-signin-button  type="standard" size='medium' class="google"></asl-google-signin-button>
+        <p>{{feedback}}</p>
+        <a href="./register" class="link">Non sei registrato? Registrati!</a>
+        <br>
+        <a href="./reset-password" class="link">Dimenticata la password? Recuperala!</a>
+    </div>
+</div>

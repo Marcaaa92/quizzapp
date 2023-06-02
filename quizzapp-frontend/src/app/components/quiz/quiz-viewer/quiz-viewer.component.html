@@ -2,16 +2,28 @@
     <form *ngIf="quiz">
         <h2>{{quiz.title}}</h2>
         <h3>{{quiz.description}}</h3>
-        <div *ngFor="let questions of quiz.questions ; let i = index">
-            <h4>{{questions.title}}</h4>
-            <div style="display: flex;">
-                <div *ngFor="let answers of questions.answers ; let j = index">
-                    <span id="{{i}}-{{j}}">{{answers.text}}</span>
-                    <span><input [(ngModel)]="quiz.questions![i].answers![j].correct" [ngModelOptions]="{standalone: true}"  type="checkbox" (click)="formValidator('w')" id="{{i}}-{{j}}"></span>
+        <div class="container">
+            <div *ngIf="quiz.questions">
+                <div class="question-text">
+                    <h4>{{quiz.questions[index].title}}</h4>
+                </div>
+                    <div *ngFor="let answers of quiz.questions[index].answers ; let j = index" class="container-answers">
+                        <button class="answer-choices" (click)="setCorrect(j)" *ngIf="!answers.correct">{{answers.text}}</button>
+                        <button class="answer-choices answer-selected" (click)="setCorrect(j)" *ngIf="answers.correct">{{answers.text}}</button>
+                    </div>
+                    <br>
+            </div>
+            <div>        
+                <div class="box-confirm">
+                    <button class="btn-confirmed" (click)="next()" [disabled]="!arrowRightStyle" >Avanti</button>
+                </div>
+                <div class="box-confirm">
+                    <button class="btn-confirmed" (click)="previous()" [disabled]="!arrowLeftStyle" >Indietro</button>
                 </div>
             </div>
         </div>
-        <button type="submit" id="submit" (click)="test()" [disabled]="!allCompiled" #submit>Invia quiz!</button>
     </form>
 </div>
+<button type="submit" id="submit" (click)="test()" [disabled]="!allCompiled" #submit>Invia quiz!</button>
+
 <p>{{feedback}}</p>

@@ -3,31 +3,30 @@
     <form  #form="ngForm">
         <label for="title">Titolo quiz</label>
         <br>
-        <input type="text" id="title" [(ngModel)]="quiz.title"  [ngModelOptions]="{standalone: true}" #title="ngModel" (keypress)="formValidator(title.value)">
-        <label for="title" *ngIf="title.value==''&& title.touched">Il campo deve essere compilato</label>
+        <input class="form-control" type="text" id="title" [(ngModel)]="quiz.title"  [ngModelOptions]="{standalone: true}" #title="ngModel" (keypress)="formValidator(title.value)">
+        <label for="title" *ngIf="title.value==''&& title.touched">Il campo deve essere compilato<br></label>
         <br>
-    
         <label for="description">Descrizione quiz</label>
         <br>
-        <input type="text" id="description" [(ngModel)]="quiz.description" [ngModelOptions]="{standalone: true}" #subititle="ngModel" (keypress)="formValidator(subititle.value)">
-        <label for="description" *ngIf="subititle.value==''&& subititle.touched">Il campo deve essere compilato</label>
+        <input class="form-control" type="text" id="description" [(ngModel)]="quiz.description" [ngModelOptions]="{standalone: true}" #subititle="ngModel" (keypress)="formValidator(subititle.value)">
+        <label for="description" *ngIf="subititle.value==''&& subititle.touched">Il campo deve essere compilatobr></label>
         <br>
     
         <div *ngFor="let question of quiz.questions; let i = index">
     
-            <label for="questionTitle{{i+1}}">Domanda n {{question.id}}</label>
+            <label style="margin-left: 2%;"  for="questionTitle{{i+1}}">Domanda n {{question.id}}</label>
             <br>
-            <input type="text" id="questionTitle{{i+1}}" [(ngModel)]="quiz.questions![i].title" [ngModelOptions]="{standalone: true}" #questionInput="ngModel" (keypress)="formValidator(questionInput.value)">
-            <label for="questionTitle{{i+1}}" *ngIf="questionInput.value==''&& questionInput.touched">Il campo deve essere compilato</label>
+            <input class="form-control" style="margin-left: 2%;" type="text" id="questionTitle{{i+1}}" [(ngModel)]="quiz.questions![i].title" [ngModelOptions]="{standalone: true}" #questionInput="ngModel" (keypress)="formValidator(questionInput.value)">
             <svg (click)="deleteQuestion(question)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
             </svg>
             <br>
+            <label style="margin-left: 2%;"  for="questionTitle{{i+1}}" *ngIf="questionInput.value==''&& questionInput.touched">Il campo deve essere compilato<br></label>
             <div *ngFor="let answer of question.answers; let j = index">
-                <label for="answerText{{i + '-' + j}}">risposta n {{answer.id}}</label>
+                <label style="margin-left: 5%;" for="answerText{{i + '-' + j}}">risposta n {{answer.id}}</label>
                 <br>
-                <input type="text" id="answerText{{i + '-' + j}}" [(ngModel)]="quiz.questions![i].answers![j].text" [ngModelOptions]="{standalone: true}" #answerInput="ngModel" (keypress)="formValidator(answerInput.value)">
-                <label for="title" for="answerText{{i + '-' + j}}" *ngIf="answerInput.value==''&& answerInput.touched">Il campo deve essere compilato</label>
+                <input style="margin-left: 5%;" class="form-control" type="text" id="answerText{{i + '-' + j}}" [(ngModel)]="quiz.questions![i].answers![j].text" [ngModelOptions]="{standalone: true}" #answerInput="ngModel" (keypress)="formValidator(answerInput.value)">
+                <label style="margin-left: 5%;"  for="title" for="answerText{{i + '-' + j}}" *ngIf="answerInput.value==''&& answerInput.touched">Il campo deve essere compilato<br></label>
                 &nbsp;
                 <label for="answerTrue{{i + '-' + j}}">Vera?</label>
                 <input type="checkbox" id="answerTrue{{i + '-' + j}}" [(ngModel)]="quiz.questions![i].answers![j].correct" [ngModelOptions]="{standalone: true}" (click)="formValidator('w')">
@@ -35,18 +34,18 @@
                 <svg (click)="deleteAnswer(question.id,answer)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                 </svg>
-                <button *ngIf="answer.id==question.answers?.length" id="addAnswers" (click)="addAnswer(question.id)" class="btn btn-primary">Add answer</button>
+                <button *ngIf="answer.id==question.answers?.length" id="addAnswers" (click)="addAnswer(question.id)" class="button">Add answer</button>
             </div>
             <br>
-            <button *ngIf="question.id==quiz.questions!.length" id="addQuestion" (click)="addQuestion()" class="btn btn-primary">Add question</button>
+            <button *ngIf="question.id==quiz.questions!.length" id="addQuestion" (click)="addQuestion()" class="button">Add question</button>
             </div>
             <br>
         <div *ngIf="quiz.questions!.length==0">
-            <button id="addQuestion" (click)="addQuestion()" class="btn btn-primary">Add question</button>
+            <button id="addQuestion" (click)="addQuestion()" class="button">Add question</button>
             <br>
             <br>
         </div>    
-        <button type="submit" id="submit" (click)="generate()" [disabled]="!valid" class="btn btn-primary" #submit>Crea!</button>
+        <button type="submit" id="submit" (click)="generate()" [disabled]="!valid" class="button" #submit>Crea!</button>
       </form>
     </div>
 <p>{{feedback}}<a *ngIf="quizLink" href="{{quizLink}}">Vai al quiz</a></p>
