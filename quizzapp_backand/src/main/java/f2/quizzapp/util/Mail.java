@@ -61,7 +61,7 @@ public class Mail {
 
     public Properties getProperties() {
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream("quizzapp/resources/config.properties")) {
+        try (InputStream input = new FileInputStream("resources/config.properties")) {
             prop.load(input);
             return prop;
         } catch (IOException e) {
