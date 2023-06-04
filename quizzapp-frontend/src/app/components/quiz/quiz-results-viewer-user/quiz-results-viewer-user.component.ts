@@ -30,7 +30,7 @@ export class QuizResultsViewerUserComponent {
         },
         error: (error) => {
           if (error.error.statusCode == 404) {
-            this.feedback = "Il quiz non esiste"
+            this.feedback = "Il quiz non esiste o correzione non ancora pubblicata"
             this.canView = false;
           }
           if (error.error.statusCode == 400) {

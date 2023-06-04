@@ -2,6 +2,7 @@
     display:flex;
     margin-left: auto;
     margin-right: 0;
+    justify-content: center;
 }   
 .arrow{
     width: 300px;
@@ -17,3 +18,18 @@
     align-items: center;
     display: flex;
 }
+
+.feedback {
+    margin: auto;
+    text-align: center;
+  }
+  
+  .feedback p {
+    margin: auto;
+    text-align: center;
+    color: #f1f1f1;
+    font-weight: 800;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    font-family: 'Poppins', sans-serif;
+  }

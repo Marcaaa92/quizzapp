@@ -1,85 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,600;1,100;1,800&display=swap');
 
-#myProgress {
-  width: 70%;
-  background-color: white;
-  margin: 3rem;
-  margin-left: 4.7rem;
-  height: 1rem;
-  border-radius: 12px;
-}
-
-#myBar {
-  width: 0%;
-  transition : width 0.5s linear;
-  height: 1rem;
-  border-radius: 12px;
-  background-color: #1d3557;
-}
-
-.nav-container {
-  display: flex;
-}
-
-.img-container {
-  text-align: center;
-  align-items: center;
-  display: flex;
-
-}
-
-.img-container img{
-  width: 10rem;
-  height: 6rem;
-}
-
-
 /* CONTAINER-QUIZ */
 
 .container {
   width: 80%;
   margin:  auto;
-  /* border: 2px solid #1d3557; */
-  /* border-radius: 12px;
-  background-color: white;
-  padding: 12px; */
 }
-
-.timer {
-  position: absolute;
-  top: 25px;
-  right: 4%;
-  border: 5px solid #1d3557;
-  color: #1d3557;
-  border-radius: 50%;
-  height: 5rem;
-  width: 5rem;
-  font-size: 2rem;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-
-/* .timer {
-  width: 15vmin;
-    height: 15vmin;
-  box-shadow: 0 0 0 1.875vmin, inset 3.75vmin 3.75vmin 7.5vmin rgba(0, 0, 0, 0.125), 3.75vmin 3.75vmin 7.5vmin rgba(0, 0, 0, 0.125);
-  font-size: 3rem;
-  text-shadow: 3.75vmin 3.75vmin 7.5vmin rgba(0, 0, 0, 0.125);
-  position: absolute;
-  top: 5rem;
-  right: 12rem;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  color: white;
-  border-radius: 50%;
-  font-weight: 700
-} */
 
 .number-questions {
   height: 1rem;
@@ -89,21 +16,33 @@
   width: 40%;
   text-align: center;
   align-items: center;
-  color: #1d3557;
+  color: #111111;
   font-family: 'Poppins', sans-serif;
 }
 
 .question-text {
-  /* border: 2px solid yellow; */
   text-align: center;
   font-size: 2.6rem;
   font-weight: 900;
-  color: #1d3557;
+  color: #f1f1f1;
   font-family: 'Poppins', sans-serif;
 }
-
+.quiz-title {
+  margin-top: 5%;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #f1f1f1;
+  font-family: 'Poppins', sans-serif;
+}
+.quiz-description{
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #f1f1f1;
+  font-family: 'Poppins', sans-serif;
+}
 .container-answers {
-  /* border: 2px solid blue; */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -114,50 +53,62 @@
 .answer-choices {
   border: none;
   width: 70%;
-  margin: auto;
+  margin:auto;
+  margin-bottom:1rem;
   height: 3.2rem;
   border-radius: 18px;
-  color: #1d3557;
+  color: #111111;
   font-weight: 500;
   font-size: 1.3rem;
   font-family: 'Poppins', sans-serif;
+  transition-duration: 0.5s;
 }
 
 .answer-choices:hover {
   cursor: pointer;
-  background-color: #eb9846;
+  background-color: #01d449;
   color: white;
 }
 
 .answer-selected {
   background-color: antiquewhite;
-  background-color: #eb9846;
+  background-color: #01d449;
   color: white;
 }
-
+.confirm-box{
+  display: flex;
+}
 .box-confirm {
   margin: 1rem auto;
   width: 30%;
   text-align: center;
 }
 
-.btn-confirmed {
+.box{
+  display: flex;
+  flex-direction: row;
+}
+.button {
   border: none;
-  background-color: #eb9846;
+  background-color: #01d449;
   color: white;
   height: 3rem;
   width: 10rem;
   font-size: 1.1rem;
   border-radius: 25px;
-  transition-duration: 2s;
+  transition-duration: 0.5s;
+  justify-content: center;
 }
 
-.btn-confirmed:hover {
+.button:hover {
   cursor: pointer;
   background-color: white;
-  color: #1d3557;
+  color: #111111;
 }
-
+.button:disabled {
+  background-color: #c1fdd5;
+  color: #111111;
+}
 /* Quiz Completed */
 .quiz-completed {
   margin: auto;
@@ -167,7 +118,7 @@
 .quiz-completed p {
   margin: auto;
   text-align: center;
-  color: #1d3557;
+  color: #f1f1f1;
   font-weight: 800;
   font-size: 1.3rem;
   margin-top: 1rem;
@@ -180,15 +131,6 @@
 }
 
 @media only screen and (max-width: 1000px) {
-  #myProgress {
-    width: 90%;
-    height: 1.5rem;
-  }
-  
-  #myBar {
-    background-color: #1d3557;
-    height: 1.5rem;
-  }
   
   /* CONTAINER-QUIZ */
   
@@ -197,26 +139,31 @@
     margin: 1rem auto;
   }
   
-  .timer {
-    position: absolute;
-    top: 85px;
-    right: 4%;
-    border-radius: 50%;
-    height: 3rem;
-    width: 3rem;
-    font-size: 1.2rem;
-  }
-  
   .number-questions {
     height: 0.5rem;
     font-size: 1.2rem;
   }
   
+  .quiz-title {
+    margin-top: 10%;
+    text-align: center;
+    font-size: 2.15rem;
+    font-weight: 900;
+    color: #f1f1f1;
+    font-family: 'Poppins', sans-serif;
+  }
+  .quiz-description{
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #f1f1f1;
+    font-family: 'Poppins', sans-serif;
+  }
   .question-text {
     text-align: center;
     font-size: 1.6rem;
     font-weight: 900;
-    color: #1d3557;
+    color: #f1f1f1;
     font-family: 'Poppins', sans-serif;
   }
   
@@ -230,10 +177,11 @@
   .answer-choices {
     border: none;
     width: 90%;
-    margin: auto;
+    margin:auto;
+    margin-bottom:1rem;
     height: 3.2rem;
     border-radius: 18px;
-    color: #1d3557;
+    color: #111111;
     font-weight: 500;
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
@@ -241,13 +189,13 @@
   
   .answer-choices:hover {
     cursor: pointer;
-    background-color: #eb9846;
+    background-color: #01d449;
     color: white;
   }
   
   .answer-selected {
     background-color: antiquewhite;
-    background-color: #eb9846;
+    background-color: #01d449;
     color: white;
   }
   
@@ -257,17 +205,18 @@
     text-align: center;
   }
   
-  .btn-confirmed {
+  .button {
     border: none;
-    background-color: #eb9846;
+    background-color: #01d449;
     color: white;
     height: 3rem;
     width: 10rem;
     font-size: 1.1rem;
     border-radius: 25px;
   }
-  .btn-confirmed:disabled {
-    background-color: #edbd8d;
+  .button:disabled {
+    background-color: #c1fdd5;
+    color: #111111;
   }
   
   /* Quiz Completed */
@@ -279,16 +228,10 @@
   .quiz-completed p {
     margin: auto;
     text-align: center;
-    color: #1d3557;
+    color: #f1f1f1;
     font-weight: 800;
     font-size: 1.3rem;
     margin-top: 1rem;
     font-family: 'Poppins', sans-serif;
   }
-  
-  .check-logo {
-    width: 12rem;
-    height: 12rem;
-  }
-
 }

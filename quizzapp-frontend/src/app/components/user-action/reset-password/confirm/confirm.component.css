@@ -81,3 +81,17 @@ button:disabled{
 p{
   color: #f7f7f7;
 }
+.feedback {
+  margin: auto;
+  text-align: center;
+}
+
+.feedback p {
+  margin: auto;
+  text-align: center;
+  color: #f1f1f1;
+  font-weight: 800;
+  font-size: 1.3rem;
+  margin-top: 1rem;
+  font-family: 'Poppins', sans-serif;
+}

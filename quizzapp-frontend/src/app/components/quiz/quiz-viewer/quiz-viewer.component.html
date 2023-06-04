@@ -1,7 +1,7 @@
 <div *ngIf='feedback==""||canView'>
     <form *ngIf="quiz">
-        <h2>{{quiz.title}}</h2>
-        <h3>{{quiz.description}}</h3>
+        <h2 class="quiz-title">{{quiz.title}}</h2>
+        <h3 class="quiz-description">{{quiz.description}}</h3>
         <div class="container">
             <div *ngIf="quiz.questions">
                 <div class="question-text">
@@ -13,17 +13,20 @@
                     </div>
                     <br>
             </div>
-            <div>        
-                <div class="box-confirm">
-                    <button class="btn-confirmed" (click)="next()" [disabled]="!arrowRightStyle" >Avanti</button>
-                </div>
-                <div class="box-confirm">
-                    <button class="btn-confirmed" (click)="previous()" [disabled]="!arrowLeftStyle" >Indietro</button>
-                </div>
+            <div>
+                <div class="box">
+                    <div class="box-confirm">
+                        <button class="button" (click)="previous()" [disabled]="!arrowLeftStyle" >Indietro</button>
+                    </div>
+                    <div class="box-confirm">
+                        <button class="button" (click)="next()" [disabled]="!arrowRightStyle" >Avanti</button>
+                    </div>
+                </div>        
             </div>
+        </div>
+        <div class="box-confirm ">
+            <button type="submit" id="submit" class="button" (click)="submitQuiz()" [disabled]="!allCompiled" #submit>Invia quiz!</button>
         </div>
     </form>
 </div>
-<button type="submit" id="submit" (click)="test()" [disabled]="!allCompiled" #submit>Invia quiz!</button>
-
-<p>{{feedback}}</p>
+<div class="quiz-completed"><p>{{feedback}}</p></div>

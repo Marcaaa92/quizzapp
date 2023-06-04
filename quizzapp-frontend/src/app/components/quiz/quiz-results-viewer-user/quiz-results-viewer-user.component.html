@@ -1,10 +1,12 @@
 <div *ngIf="usersResults">
     <h1>Risultati del quiz {{usersResults["quiz"]["title"]}}</h1>
+    <div class="scroller">
         <div>
             <h5>Utente: <span style="font-weight:bold">{{getUserName()}}</span></h5>
             <h6>Email: <span style="font-weight:bold">{{getUserEmail()}}</span></h6>
             <h6>Domade corrette: <span style="font-weight:bold; font-size:large">{{getUserRightAnswers()}}/{{getTotalQuestions()}} ({{getRating()}}%)</span></h6>
         </div>
+    </div>
     <div *ngIf="usersResults['results'].length==0">
         <p>La tua risposta non è ancora stata corretta</p>
     </div>
@@ -14,4 +16,4 @@
 </div>
 
 
-<p>{{feedback}}</p>
+<div class="feedback"><p>{{feedback}}</p></div>
