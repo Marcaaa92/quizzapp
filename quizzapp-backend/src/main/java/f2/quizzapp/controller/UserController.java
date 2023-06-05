@@ -148,7 +148,7 @@ public class UserController {
 
     @RequestMapping(path = "/login-google", method = RequestMethod.POST)
     public ResponseEntity<String> loginGoogle(@Valid @RequestBody TokenDTO tokenDTO, HttpServletRequest request) {
-        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier(new NetHttpTransport(), new GsonFactory());
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory()).build();
         try {
             GoogleIdToken token = verifier.verify(tokenDTO.token());
             Payload pl = token.getPayload();
