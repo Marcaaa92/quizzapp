@@ -23,6 +23,8 @@ public class QuizzappApplication {
     @Value("${server.AESSECRET}")
     private String secret;
 
+    @Value("${server.jwtkey}")
+    private String jwtkey;
     @Autowired
     public static void main(String[] args) {
         SpringApplication.run(QuizzappApplication.class, args);
@@ -58,7 +60,10 @@ public class QuizzappApplication {
     String secret() {
         return secret;
     }
-
+    @Bean
+    String jwtkey() {
+        return jwtkey;
+    }
     @Bean
     public Gson gson() {
         return new Gson();

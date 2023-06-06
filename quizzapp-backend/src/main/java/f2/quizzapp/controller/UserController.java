@@ -57,9 +57,9 @@ public class UserController {
     private final String baseUrl;
     private final String SECRET;
     private final SecretKeySpec key;
-
+    private final String jwtkey;
     @Autowired
-    public UserController(Logger loggerUser, Gson gson, Mail mail, UserService userService, InsertUserDTOMapper insertUserDTOMapper, BCryptPasswordEncoder encoder, String baseUrl, String SECRET, String secret) {
+    public UserController(Logger loggerUser, Gson gson, Mail mail, UserService userService, InsertUserDTOMapper insertUserDTOMapper, BCryptPasswordEncoder encoder, String baseUrl, String SECRET, String secret, String jwtkey) {
         this.loggerUser = loggerUser;
         this.gson = gson;
         this.mail = mail;
@@ -68,6 +68,7 @@ public class UserController {
         this.encoder = encoder;
         this.baseUrl = baseUrl;
         this.SECRET = SECRET;
+        this.jwtkey = jwtkey;
         byte[] bytes = new BigInteger("7F" + secret, 16).toByteArray();
         key = new SecretKeySpec(bytes, 1, bytes.length - 1, "AES");
     }
@@ -78,7 +79,7 @@ public class UserController {
         if (!userService.existByEmail(user.getEmail())) {
             User userNew = new User(user.getName(), user.getEmail(), encoder.encode(user.getPassword()));
             try {
-                Algorithm algorithm = Algorithm.HMAC512("zlatan_ibrahimovic");
+                Algorithm algorithm = Algorithm.HMAC512(jwtkey);
                 String tokenJwt = JWT.create().withIssuer("marca").withSubject(gson.toJson(userNew)).withExpiresAt(Date.from(ZonedDateTime.now().plusMinutes(5).toInstant())).sign(algorithm);
                 String token = AESEncoder.encode(tokenJwt, key);
                 mail.sendMail(user.getEmail(), "Click on this link to confirm your registration: " + baseUrl + "register/" + token);
@@ -97,7 +98,7 @@ public class UserController {
     ResponseEntity<String> registrationVerification(@Valid @RequestBody TokenDTO tokenDTO, HttpServletRequest request) {
 
         try {
-            Algorithm algorithm = Algorithm.HMAC512("zlatan_ibrahimovic");
+            Algorithm algorithm = Algorithm.HMAC512(jwtkey);
             JWTVerifier verifier = JWT.require(algorithm).withIssuer("marca").build();
             String tokenJwt = AESEncoder.decode(tokenDTO.token(), key);
             System.out.println(tokenJwt);
@@ -109,7 +110,7 @@ public class UserController {
             } else {
                 try {
                     String tokenJwtU;
-                    algorithm = Algorithm.HMAC512("zlatan_ibrahimovic");
+                    algorithm = Algorithm.HMAC512(jwtkey);
                     tokenJwtU = JWT.create().withIssuer("marca").withSubject(gson.toJson(userToken)).withExpiresAt(Date.from(ZonedDateTime.now().plusMinutes(5).toInstant())).sign(algorithm);
                     String userTokenField = AESEncoder.encode(tokenJwtU, key);
                     user.setToken(userTokenField);
@@ -175,7 +176,7 @@ public class UserController {
                 userFromDb.setPassword(encoder.encode(changePasswordDTO.password()));
                 User userToken = new User(userFromDb.getEmail(), userFromDb.getPassword());
                 try {
-                    Algorithm algorithm = Algorithm.HMAC512("zlatan_ibrahimovic");
+                    Algorithm algorithm = Algorithm.HMAC512(jwtkey);
                     String tokenJwt = JWT.create().withIssuer("marca").withSubject(gson.toJson(userToken)).sign(algorithm);
                     String token = AESEncoder.encode(tokenJwt, key);
                     userFromDb.setToken(token);
@@ -202,7 +203,7 @@ public class UserController {
                 if (encoder.matches(changeEmailDTO.password(), userFromDb.getPassword())) {
                     userFromDb.setEmail(changeEmailDTO.newEmail());
                     try {
-                        Algorithm algorithm = Algorithm.HMAC512("zlatan_ibrahimovic");
+                        Algorithm algorithm = Algorithm.HMAC512(jwtkey);
                         String tokenJwt = JWT.create().withIssuer("marca").withSubject(userFromDb.toString()).withExpiresAt(Date.from(ZonedDateTime.now().plusMinutes(5).toInstant())).sign(algorithm);
                         String token = AESEncoder.encode(tokenJwt, key);
                         mail.sendMail(changeEmailDTO.newEmail(), "Click on this link to change your password: " + baseUrl + "change-email/" + token);
@@ -226,7 +227,7 @@ public class UserController {
     @SuppressWarnings("unused")
     ResponseEntity<String> changeEmailSetNew(@Valid @RequestBody TokenDTO tokenDTO, HttpServletRequest request) {
         try {
-            Algorithm algorithm = Algorithm.HMAC512("zlatan_ibrahimovic");
+            Algorithm algorithm = Algorithm.HMAC512(jwtkey);
             JWTVerifier verifier = JWT.require(algorithm).withIssuer("marca").build();
             String token = AESEncoder.decode(tokenDTO.token(), key);
             DecodedJWT decodedJWT = verifier.verify(token);
@@ -237,7 +238,7 @@ public class UserController {
             } else {
                 try {
                     String tokenJwt;
-                    algorithm = Algorithm.HMAC512("zlatan_ibrahimovic");
+                    algorithm = Algorithm.HMAC512(jwtkey);
                     tokenJwt = JWT.create().withIssuer("marca").withSubject(gson.toJson(userToken)).withExpiresAt(Date.from(ZonedDateTime.now().plusMinutes(5).toInstant())).sign(algorithm);
                     String tokenEncoded = AESEncoder.encode(tokenJwt, key);
                     user.setToken(tokenEncoded);
@@ -260,7 +261,7 @@ public class UserController {
         if (userService.existByEmail(resetPasswordDTO.email())) {
             User userFromDb = userService.findByEmail(resetPasswordDTO.email());
             try {
-                Algorithm algorithm = Algorithm.HMAC512("zlatan_ibrahimovic");
+                Algorithm algorithm = Algorithm.HMAC512(jwtkey);
                 String tokenJwt = JWT.create().withIssuer("marca").withSubject(userFromDb.toString()).withExpiresAt(Date.from(ZonedDateTime.now().plusMinutes(5).toInstant())).sign(algorithm);
                 String token = AESEncoder.encode(tokenJwt, key);
                 mail.sendMail(resetPasswordDTO.email(), "Click on this link to perform password recovery: " + baseUrl + "reset-password/" + token);
@@ -276,7 +277,7 @@ public class UserController {
     @SuppressWarnings("unused")
     ResponseEntity<String> resetPasswordConfirm(@Valid @RequestBody ResetPasswordNewPasswordDTO resetPasswordNewPasswordDTO, HttpServletRequest request) {
         try {
-            Algorithm algorithm = Algorithm.HMAC512("zlatan_ibrahimovic");
+            Algorithm algorithm = Algorithm.HMAC512(jwtkey);
             String token = AESEncoder.decode(resetPasswordNewPasswordDTO.token(), key);
             JWTVerifier verifier = JWT.require(algorithm).withIssuer("marca").build();
             DecodedJWT decodedJWT = verifier.verify(token);
