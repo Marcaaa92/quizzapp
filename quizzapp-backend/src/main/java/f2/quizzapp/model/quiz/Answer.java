@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Answer {
     @Id
     String id;
-    @Column(name = "text", length = 128)
+    @Column(name = "text", length = 255)
     String text;
     Boolean correct;
     @JsonIgnore
