@@ -30,6 +30,7 @@ import { QuizResultsViewerUserComponent } from './components/quiz/quiz-results-v
 import { QuizCorrectionUserComponent } from './components/quiz/quiz-results-viewer-user/quiz-correction-user/quiz-correction-user.component';
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { Environment } from 'src/environments/environment';
+import { QuizFromExcelComponent } from './components/quiz/quiz-from-excel/quiz-from-excel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { Environment } from 'src/environments/environment';
     QuizCorrectionUserComponent,
     NotfoundComponent,
     HomeComponent,
+    QuizFromExcelComponent,
   ],
   imports: [
     BrowserModule,
