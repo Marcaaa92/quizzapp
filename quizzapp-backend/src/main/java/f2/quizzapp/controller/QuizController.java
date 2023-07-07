@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import f2.quizzapp.DTO.quizDTO.AnswerDTO;
 import f2.quizzapp.DTO.quizDTO.QuestionDTO;
 import f2.quizzapp.DTO.quizDTO.QuizDTO;
-import f2.quizzapp.DTO.userDTO.SaveQuizDTO;
+import f2.quizzapp.DTO.quizDTO.SaveQuizDTO;
 import f2.quizzapp.DTO.userDTO.TokenDTO;
 import f2.quizzapp.DTOMapper.quizDTOMapper.AnswerDTOMapper;
 import f2.quizzapp.DTOMapper.quizDTOMapper.QuestionDTOMapper;
