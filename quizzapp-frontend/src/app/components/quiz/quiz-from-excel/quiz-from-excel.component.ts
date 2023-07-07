@@ -33,6 +33,8 @@ export class QuizFromExcelComponent {
   }
 
   submitForm() {
+    this.loader.nativeElement.style.display = "block";
+
     this.submit.nativeElement.disabled = true;
     this.canView = false;
     var token = Environment.getToken();
@@ -42,12 +44,14 @@ export class QuizFromExcelComponent {
       quiz.token = token as unknown as string;
       this.service.newQuiz(quiz).subscribe((response) => {
         if (response.statusCode == 200) {
+          this.loader.nativeElement.style.display = "none";
           this.feedback = 'quiz aggiunto con successo!';
           this.quizLink = Environment.siteUrl + '/quiz-viewer/' + response.msg
           this.form.reset()
         } else {
+          this.loader.nativeElement.style.display = "none";
           this.canView = true;
-          this.feedback = response.msg;
+          this.feedback = "caricamento fallito";
         }
       });
     } else {
