@@ -22,27 +22,27 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<String> responseEntity(UserNotFoundException userNotFoundException, HttpServletRequest request) {
-        return ResponseEntityUtils.response(HttpStatus.UNAUTHORIZED, userNotFoundException.getMessage(), request);
+        return ResponseEntityUtils.response(HttpStatus.NOT_FOUND, userNotFoundException.getMessage(), request);
     }
 
     @ExceptionHandler(QuizNotFoundException.class)
     public ResponseEntity<String> responseEntity(QuizNotFoundException quizNotFoundException, HttpServletRequest request) {
-        return ResponseEntityUtils.response(HttpStatus.UNAUTHORIZED, quizNotFoundException.getMessage(), request);
+        return ResponseEntityUtils.response(HttpStatus.NOT_FOUND, quizNotFoundException.getMessage(), request);
     }
 
     @ExceptionHandler(QuestionNotFoundException.class)
     public ResponseEntity<String> responseEntity(QuestionNotFoundException questionNotFoundException, HttpServletRequest request) {
-        return ResponseEntityUtils.response(HttpStatus.UNAUTHORIZED, questionNotFoundException.getMessage(), request);
+        return ResponseEntityUtils.response(HttpStatus.NOT_FOUND, questionNotFoundException.getMessage(), request);
     }
 
     @ExceptionHandler(AnswerNotFoundException.class)
     public ResponseEntity<String> responseEntity(AnswerNotFoundException answerNotFoundException, HttpServletRequest request) {
-        return ResponseEntityUtils.response(HttpStatus.UNAUTHORIZED, answerNotFoundException.getMessage(), request);
+        return ResponseEntityUtils.response(HttpStatus.NOT_FOUND, answerNotFoundException.getMessage(), request);
     }
 
     @ExceptionHandler(QuizResultNotFoundException.class)
     public ResponseEntity<String> responseEntity(QuizResultNotFoundException quizResultNotFoundException, HttpServletRequest request) {
-        return ResponseEntityUtils.response(HttpStatus.UNAUTHORIZED, quizResultNotFoundException.getMessage(), request);
+        return ResponseEntityUtils.response(HttpStatus.NOT_FOUND, quizResultNotFoundException.getMessage(), request);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
