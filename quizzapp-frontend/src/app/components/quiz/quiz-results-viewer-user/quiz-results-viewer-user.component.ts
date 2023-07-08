@@ -33,6 +33,10 @@ export class QuizResultsViewerUserComponent {
             this.feedback = "Il quiz non esiste o correzione non ancora pubblicata"
             this.canView = false;
           }
+          if (error.error.statusCode == 404) {
+            this.feedback = "Il quiz non esiste o correzione non ancora pubblicata"
+            this.canView = false;
+          }
         },
       });
     } else {

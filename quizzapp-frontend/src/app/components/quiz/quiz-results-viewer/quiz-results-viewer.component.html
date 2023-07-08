@@ -33,8 +33,9 @@
     <div *ngIf="usersResults['results'].length==0">
         <p>Il quiz non ha ancora ricevuto correzioni</p>
     </div>
+    <div *ngIf="usersResults['results']">
+        <app-quiz-correction [quiz]="usersResults['quiz']" [quizCorrection]="usersResults['results'][index]['correction']"></app-quiz-correction>
+    </div>
 </div>
-<div *ngIf="usersResults['results']">
-    <app-quiz-correction [quiz]="usersResults['quiz']" [quizCorrection]="usersResults['results'][index]['correction']"></app-quiz-correction>
-</div>
+
 <div class="feedback"><p>{{feedback}}</p></div>

@@ -1,4 +1,4 @@
-<div *ngIf="usersResults">
+<div *ngIf="usersResults && usersResults['results'].length!=0">
     <h1>Risultati del quiz {{usersResults["quiz"]["title"]}}</h1>
     <div class="scroller">
         <div>
@@ -11,9 +11,9 @@
         <p>La tua risposta non è ancora stata corretta</p>
     </div>
 </div>
-<div *ngIf="usersResults">
+<div *ngIf="usersResults && usersResults['results'].length!=0">
     <app-quiz-correction-user [quiz]="usersResults['quiz']" [quizCorrection]="usersResults['results'][index]['correction']"></app-quiz-correction-user  >
 </div>
-
+<div *ngIf="usersResults['results'].length==0" class="feedback"><p>Quiz non svolto</p></div>
 
 <div class="feedback"><p>{{feedback}}</p></div>
