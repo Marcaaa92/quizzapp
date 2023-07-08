@@ -1,4 +1,4 @@
-package f2.quizzapp.DTO.userDTO;
+package f2.quizzapp.DTO.quizDTO;
 
 import jakarta.validation.constraints.NotNull;
 
