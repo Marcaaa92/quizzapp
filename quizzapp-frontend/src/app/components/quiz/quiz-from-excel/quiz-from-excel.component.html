@@ -1,0 +1,30 @@
+
+<div class = "background">
+    <div class="container">
+        <h1 class="title">Quiz generator - Excel loader</h1>
+        <form [formGroup]="form" (ngSubmit)="submitForm()" *ngIf="canView">
+            <div class="div-form-control">
+                <input type="title" formControlName="title" class="form-control" placeholder="Titolo quiz">
+                <br>
+                <label *ngIf="form.get('title')?.touched==true && form.get('title')?.valid==false" for="title" class="hint">Il campo deve essere compilato e deve contenere un titolo valido</label>
+            </div>
+            <div class="div-form-control">
+                <input type="description" formControlName="description" class="form-control" placeholder="Descrizione quiz">
+                <br>
+                <label *ngIf="form.get('description')?.touched==true && form.get('description')?.valid==false" for="description" class="hint">Il campo password deve essere compilato</label>
+            </div>
+            <div class="div-form-control">
+                <label for="excelFile">File excel</label>
+                <br>
+                <input type="file" class="form-control" formControlName="excelFile" (change)="fileChanged($event)">
+                <br>
+                <label *ngIf="form.get('excelFile')?.touched==true && form.get('excelFile')?.valid==false" for="excelFile">Devi selezionare un file e di tipo excel</label>
+                <br>
+            </div>
+            <button type="submit" id="submit" [disabled]="!form.valid && !fileValid" class="button" #submit>Carica file</button>
+            <div class="feedback"><p>{{feedback}}</p></div>
+            <div class="feedback"><a *ngIf="quizLink" href="{{quizLink}}">Vai al quiz</a></div>
+        </form>
+        <div class="lds-ring" style="width:5%; display:none" #loader><div></div><div></div><div></div><div></div></div>
+    </div>
+</div>

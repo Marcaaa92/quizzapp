@@ -18,6 +18,7 @@ import { QuizResultsViewerComponent } from './components/quiz/quiz-results-viewe
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { HomeComponent } from './components/home/home.component';
 import { QuizResultsViewerUserComponent } from './components/quiz/quiz-results-viewer-user/quiz-results-viewer-user.component';
+import { QuizFromExcelComponent } from './components/quiz/quiz-from-excel/quiz-from-excel.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: 'home', pathMatch: 'full' },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'quiz-viewer/:quizId/results', component: QuizResultsViewerComponent, canActivate:[LoginGuard]},
   { path: 'quiz-viewer/:quizId/results/user', component: QuizResultsViewerUserComponent, canActivate:[LoginGuard]},
   { path: 'quiz-generator', component: QuizGeneratorComponent, canActivate:[LoginGuard]},
+  { path: 'quiz-generator-excel', component: QuizFromExcelComponent, canActivate:[LoginGuard]},
   { path: 'home', component: HomeComponent},
   { path: "**", component: NotfoundComponent}
 ];

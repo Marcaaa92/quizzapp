@@ -1,15 +1,23 @@
 <div>
-        <h2>{{quiz.title}}</h2>
-        <h3>{{quiz.description}}</h3>
-        <div *ngFor="let questions of quiz.questions ; let i = index">
-            <h4>{{questions.title}}</h4>
-            <div style="display: flex;">
-                <div *ngFor="let answers of questions.answers ; let j = index">
-                    <span *ngIf='quizCorrection["questions"][i]["answers"][j]["answerStatus"]=="null"' style="background-color: transparent;">{{answers.text}}</span>
-                    <span *ngIf='quizCorrection["questions"][i]["answers"][j]["answerStatus"]=="userSelectedCorrect"' style="background-color: ;">{{answers.text}}</span>
-                    <span *ngIf='quizCorrection["questions"][i]["answers"][j]["answerStatus"]=="rightAnswers"' style="background-color: lightskyblue;">{{answers.text}}</span>
-                    <span *ngIf='quizCorrection["questions"][i]["answers"][j]["answerStatus"]=="userSelectedWrong"' style="background-color: lightcoral;">{{answers.text}}</span>
-                </div>
+    <div class="container">    
+            <div class="question-text">    
+                <h4>{{quiz.questions![0].title}}</h4>
             </div>
+            <div *ngFor="let answers of quiz.questions![index].answers ; let j = index" class="container-answers">
+                <button class="answer-choices" *ngIf='quizCorrection["questions"][index]["answers"][j]["answerStatus"]=="null"'>{{answers.text}}</button>
+                <button class="answer-choices answer-rightAnswers" *ngIf='quizCorrection["questions"][index]["answers"][j]["answerStatus"]=="rightAnswers"'>{{answers.text}}</button>
+                <button class="answer-choices answer-userSelectedWrong" *ngIf='quizCorrection["questions"][index]["answers"][j]["answerStatus"]=="userSelectedWrong"'>{{answers.text}}</button>
+                <button class="answer-choices answer-userSelectedCorrect" *ngIf='quizCorrection["questions"][index]["answers"][j]["answerStatus"]=="userSelectedCorrect"'>{{answers.text}}</button>
+            </div>
+        <div>
+            <div class="box">
+                <div class="box-confirm">
+                    <button class="button" (click)="previous()" [disabled]="!arrowLeftStyle" >Indietro</button>
+                </div>
+                <div class="box-confirm">
+                    <button class="button" (click)="next()" [disabled]="!arrowRightStyle" >Avanti</button>
+                </div>
+            </div>        
         </div>
+    </div>
 </div>

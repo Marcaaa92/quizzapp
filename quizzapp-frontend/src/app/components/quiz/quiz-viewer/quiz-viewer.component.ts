@@ -20,7 +20,7 @@ export class QuizViewerComponent {
   @ViewChild('submit') submit!: ElementRef;
   index:number = 0;
   arrowLeftStyle:boolean=false
-  arrowRightStyle:boolean=true
+  arrowRightStyle:boolean=false
 
   constructor(private route: ActivatedRoute, private service: ApiQuizService) {
     this.quizId = this.route.snapshot.paramMap.get('quizId');
@@ -43,6 +43,7 @@ export class QuizViewerComponent {
                       this.quiz.questions![i].answers![j].correct = false;
                     }
                   }
+                  if(this.quiz.questions!.length>1){this.arrowRightStyle=true}
                 }
               },
               error: (error) => {
@@ -98,7 +99,7 @@ export class QuizViewerComponent {
       }, 10);
     }
   }
-  test() {
+  submitQuiz() {
     this.submit.nativeElement.disabled=true;
     var token = Environment.getToken();
     if (token) {
@@ -179,6 +180,7 @@ export class QuizViewerComponent {
 
   }
   setCorrect(j:number){
+    this.formValidator("w")
     if(this.quiz.questions![this.index].answers![j].correct)
     this.quiz.questions![this.index].answers![j].correct=false;
     else

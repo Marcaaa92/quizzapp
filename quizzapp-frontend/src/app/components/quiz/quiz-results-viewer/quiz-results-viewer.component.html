@@ -1,17 +1,30 @@
 <div *ngIf="usersResults">
-    <h1>Risultati del quiz {{usersResults["quiz"]["title"]}}</h1>
+    <div class="container">
+        <div>
+            <h1>Risultati del quiz {{usersResults["quiz"]["title"]}}</h1>
+        </div>
+        <div class="container">
+            <p>Pubblicato</p>
+            <label class="switch" *ngIf="usersResults">
+                <input *ngIf="usersResults['quiz']['published']=='true'" type="checkbox" (click)="publish()" [checked]="true">
+                <input *ngIf="usersResults['quiz']['published']!='true'" type="checkbox" (click)="publish()" [checked]="false">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+
     <div *ngIf="usersResults['results'].length!=0" class="scroller">
-        <div  style="visibility:{{arrowLeftStyle}}" class="div-arrow">
+        <div  [ngStyle]="{'visibility':arrowLeftStyle}" class="div-arrow">
             <svg (click)="previous()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
             </svg>
         </div>
         <div>
-            <h5>Utente: <span style="font-weight:bold">{{getUserName()}}</span></h5>
-            <h6>Email: <span style="font-weight:bold">{{getUserEmail()}}</span></h6>
-            <h6>Domade corrette: <span style="font-weight:bold; font-size:large">{{getUserRightAnswers()}}/{{getTotalQuestions()}} ({{getRating()}}%)</span></h6>
+            <p>Utente: <span>{{getUserName()}}</span></p>
+            <p>Email: <span>{{getUserEmail()}}</span></p>
+            <p>Domade corrette: <span  class="userinfo">{{getUserRightAnswers()}}/{{getTotalQuestions()}} ({{getRating()}}%)</span></p>
         </div>
-        <div style="visibility:{{arrowRightStyle}}" class="div-arrow">
+        <div [ngStyle]="{'visibility':arrowRightStyle}" class="div-arrow">
             <svg (click)="next()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
             </svg>
@@ -21,12 +34,7 @@
         <p>Il quiz non ha ancora ricevuto correzioni</p>
     </div>
 </div>
-<div *ngIf="usersResults['results'][index]">
+<div *ngIf="usersResults['results']">
     <app-quiz-correction [quiz]="usersResults['quiz']" [quizCorrection]="usersResults['results'][index]['correction']"></app-quiz-correction>
 </div>
-<label class="switch" *ngIf="usersResults">
-    <input *ngIf="usersResults['quiz']['published']=='true'" type="checkbox" (click)="publish()" [checked]="true">
-    <input *ngIf="usersResults['quiz']['published']!='true'" type="checkbox" (click)="publish()" [checked]="false">
-    <span class="slider round"></span>
-  </label>
-<p>{{feedback}}</p>
+<div class="feedback"><p>{{feedback}}</p></div>

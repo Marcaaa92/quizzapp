@@ -9,7 +9,7 @@ import java.util.List;
 public class Question {
     @Id
     String id;
-    @Column(name = "title", length = 128)
+    @Column(name = "title", length = 255)
     String title;
     @JsonIgnore
     @ManyToOne

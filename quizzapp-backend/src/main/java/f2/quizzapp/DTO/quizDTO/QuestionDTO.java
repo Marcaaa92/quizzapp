@@ -8,7 +8,7 @@ import java.util.List;
 
 public record QuestionDTO(
         @NotNull(message = "Title is required.")
-        @Size(min = 2, max = 128, message = "The title must be 128 characters maximum")
+        @Size(min = 1, max = 255, message = "The title must be 128 characters maximum")
         String title,
         @Valid
         @NotNull(message = "Answers is required.")

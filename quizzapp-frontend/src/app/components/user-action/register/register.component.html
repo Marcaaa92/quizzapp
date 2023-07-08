@@ -1,7 +1,7 @@
 
 <div class = "background">
   <div class="container">
-    <h1 class="login-text">Registrati</h1>
+    <h1 class="title">Registrati</h1>
     <form [formGroup]="form" (ngSubmit)="register()">
       <div class="div-form-control">
         <input type="text" formControlName="name" placeholder="nome" class="form-control">
@@ -9,7 +9,7 @@
         <label *ngIf="form.get('name')?.dirty==true && form.get('name')?.valid==false" for="name">Il campo deve essere compilato e deve avere una lunghezza di 2 caratteri minimo</label>
       </div>
       <div class="div-form-control">
-        <input type="email" formControlName="email" placeholder="cognome" class="form-control">
+        <input type="email" formControlName="email" placeholder="email" class="form-control">
         <br>
         <label *ngIf="form.get('email')?.dirty==true && form.get('email')?.valid==false" for="email">IL campo deve essere compilato e deve contenere una mail valida</label>
       </div>
