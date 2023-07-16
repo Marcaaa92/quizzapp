@@ -48,6 +48,10 @@ export class LoginComponent {
             this.form.reset();
             this.feedback = 'Credenziali errate';
           }
+          if (err.error.statusCode == 404) {
+            this.form.reset();
+            this.feedback = 'Credenziali errate';
+          }
         },
       });
     });
@@ -68,6 +72,10 @@ export class LoginComponent {
       },
       error: (err) => {
         if (err.error.statusCode == 401) {
+          this.form.reset();
+          this.feedback = 'Credenziali errate';
+        }
+        if (err.error.statusCode == 404) {
           this.form.reset();
           this.feedback = 'Credenziali errate';
         }
