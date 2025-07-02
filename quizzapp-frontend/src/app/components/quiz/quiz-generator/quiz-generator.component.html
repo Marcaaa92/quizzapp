@@ -13,7 +13,7 @@
         <br>
     
         <div *ngFor="let question of quiz.questions; let i = index">
-    
+            
             <label style="margin-left: 2%;"  for="questionTitle{{i+1}}">Domanda n {{question.id}}</label>
             <br>
             <input class="form-control" style="margin-left: 2%;" type="text" id="questionTitle{{i+1}}" [(ngModel)]="quiz.questions![i].title" [ngModelOptions]="{standalone: true}" #questionInput="ngModel" (keypress)="formValidator(questionInput.value)">

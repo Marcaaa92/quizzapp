@@ -317,7 +317,11 @@ public class UserController {
             return ResponseEntityUtils.response(UNAUTHORIZED, "Wrong credentials", request);
         }
     }
+    @RequestMapping(path = "/make-coffee", method = RequestMethod.GET, produces = "text/html")
+    ResponseEntity<String> teapot(HttpServletRequest request) {
+        return ResponseEntity.status(I_AM_A_TEAPOT).body("<img src=\"https://d69dr897pi70n.cloudfront.net/images/blogs/3_main.jpg\"><h2>I'm a teapot bruh</h2>");
 
+    }
     @RequestMapping(path = "/check-token-validity", method = RequestMethod.POST)
     @SuppressWarnings("unused")
     ResponseEntity<String> checkTokenValidity(@Valid @RequestBody TokenDTO tokenDTO, HttpServletRequest request) {
