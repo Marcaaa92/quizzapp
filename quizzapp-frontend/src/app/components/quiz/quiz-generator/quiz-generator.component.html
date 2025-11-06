@@ -48,5 +48,5 @@
         <button type="submit" id="submit" (click)="generate()" [disabled]="!valid" class="button" #submit>Crea!</button>
       </form>
     </div>
-<p>{{feedback}}<a *ngIf="quizLink" href="{{quizLink}}">Vai al quiz</a></p>
-<p><a href="./quiz-generator-excel">Quiz generator via excel</a></p>
+<p>{{feedback}}<a *ngIf="quizLink" routerLink ="{{quizLink}}">Vai al quiz</a></p>
+<p><a routerLink="/quiz-generator-excel">Quiz generator via excel</a></p>

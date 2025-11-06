@@ -1,7 +1,7 @@
 export const Environment = {
   production: true,
-  apiUrl: 'https://servermarca.duckdns.org/beQuiz',
-  siteUrl: 'https://servermarca.duckdns.org/quizzapp',
+  apiUrl: 'https://quizzapp.servermarca.cc/api',
+  siteUrl: 'https://quizzapp.servermarca.cc',
   getToken(): boolean | string {
     var json = sessionStorage.getItem('user');
     if (json) {

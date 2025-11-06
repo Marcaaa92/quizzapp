@@ -1,15 +1,15 @@
 <h3 class="subtitle">Crea il tuo quiz!</h3>
-<a *ngIf="auth.isLoggedIn" href="./quiz-generator" class="text"><h4>Crea il tuo quiz!</h4></a>
-<a *ngIf="!auth.isLoggedIn" href="./login" class="text"><h4>Effettua il login!</h4></a>
+<a *ngIf="auth.isLoggedIn" routerLink="/quiz-generator" class="text"><h4>Crea il tuo quiz!</h4></a>
+<a *ngIf="!auth.isLoggedIn" routerLink="/login" class="text"><h4>Effettua il login!</h4></a>
 <div *ngIf="auth.isLoggedIn && quizzes">
     <h4 class="text">Ecco i tuoi quiz</h4>
     <div  class="container-quiz">
         <div *ngFor="let quiz of quizzes" class="flex-element">
                 <div class="left">
-                    <a href="quiz-viewer/{{quiz.id}}/results" class="quiz-name">{{quiz.title}}</a>
+                    <a routerLink="/quiz-viewer/{{quiz.id}}/results" class="quiz-name">{{quiz.title}}</a>
                 </div>
                 <div class="right">
-                    <a href="quiz-viewer/{{quiz.id}}" class="quiz-link">LINK</a>&nbsp;
+                    <a routerLink="/quiz-viewer/{{quiz.id}}" class="quiz-link">LINK</a>&nbsp;
                 </div>
         </div>
     </div>

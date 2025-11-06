@@ -1,0 +1,58 @@
+services:
+  
+  db: 
+    container_name: quizzapp_db
+    build:
+      context: ./
+      dockerfile: Dockerfile.db
+    volumes:
+      - quizzapp_v:/var/lib/mysql
+    networks:
+      - quizzapp_net
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      # Usa mysqladmin per verificare la connessione
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      # Aumenta l'intervallo per dare tempo al DB di inizializzarsi
+      interval: 5s
+      timeout: 60s
+      retries: 30 # Aumenta i tentativi per tollerare un avvio lento
+      start_period: 30s # Attendi 30 secondi prima di iniziare a contare i fallimenti
+    restart: always
+    ports:
+      - "20001:3306"
+
+  backend: 
+    container_name: quizzapp_be
+    build: ./quizzapp-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - quizzapp_net
+    restart: always
+
+  frontend:
+    container_name: quizzapp_fe
+    build: ./quizzapp-frontend
+    networks:
+      - quizzapp_net
+    restart: always
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "20000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - quizzapp_net
+    restart: always
+networks:
+  quizzapp_net:
+volumes:
+    quizzapp_v:

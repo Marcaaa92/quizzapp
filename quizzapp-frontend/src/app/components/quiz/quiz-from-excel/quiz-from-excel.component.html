@@ -23,7 +23,7 @@
             </div>
             <button type="submit" id="submit" [disabled]="!form.valid && !fileValid" class="button" #submit>Carica file</button>
             <div class="feedback"><p>{{feedback}}</p></div>
-            <div class="feedback"><a *ngIf="quizLink" href="{{quizLink}}">Vai al quiz</a></div>
+            <div class="feedback"><a *ngIf="quizLink" routerLink="{{quizLink}}">Vai al quiz</a></div>
         </form>
         <div class="lds-ring" style="width:5%; display:none" #loader><div></div><div></div><div></div><div></div></div>
     </div>
